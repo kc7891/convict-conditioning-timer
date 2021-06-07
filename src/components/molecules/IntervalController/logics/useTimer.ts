@@ -29,7 +29,6 @@ const useTimer = (defaultTime?: number) => {
       if (prev >= 9999) return 9999
       const next = prev + 1
       time.current = next
-      console.log(next)
       return next
     })
   }
