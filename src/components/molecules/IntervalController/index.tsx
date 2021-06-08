@@ -27,7 +27,12 @@ const IntervalController: React.FC<Props> = ({
   }, [playStatus])
 
   return (
-    <Flex alignItems="center" justifyContent="space-around" fontWeight="bold">
+    <Flex
+      alignItems="center"
+      justifyContent="space-around"
+      fontWeight="bold"
+      height="80px"
+    >
       <Text color="blackAlpha.800" fontSize="24px">
         INTERVAL
       </Text>

@@ -14,7 +14,12 @@ export const SoundToggleBar: React.FC<Props> = ({
   toggleVoice,
 }) => {
   return (
-    <Flex justifyContent="space-evenly">
+    <Flex
+      justifyContent="space-evenly"
+      height="60px"
+      alignContent="center"
+      alignItems="center"
+    >
       <Text color="blackAlpha.800" fontWeight="bold">
         SOUND
       </Text>

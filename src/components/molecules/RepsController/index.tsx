@@ -13,7 +13,12 @@ const RepsController: React.FC<Props> = ({
   onDecrementReps,
 }) => {
   return (
-    <Flex alignItems="center" justifyContent="space-around" fontWeight="bold">
+    <Flex
+      alignItems="center"
+      justifyContent="space-around"
+      fontWeight="bold"
+      height="80px"
+    >
       <Text color="blackAlpha.800" fontSize="24px">
         REPS
       </Text>

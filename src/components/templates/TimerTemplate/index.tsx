@@ -1,5 +1,5 @@
 import IntervalController from '../../molecules/IntervalController'
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import PlayerController from '../../molecules/PlayerController'
 import RepsController from '../../molecules/RepsController'
@@ -31,12 +31,11 @@ const TimerTemplate: React.FC = () => {
   }
 
   return (
-    <Box
+    <Flex
       backgroundColor="rgba(255,255,255, 0.5)"
-      width="100%"
+      width="95vw"
       maxWidth="500px"
-      height="100%"
-      maxHeight="800px"
+      flexDir="column"
     >
       <SoundToggleBar
         soundOn={soundOn}
@@ -58,22 +57,8 @@ const TimerTemplate: React.FC = () => {
         onPlay={() => setPlayStatus('playing')}
         onStop={() => setPlayStatus('stopped')}
       />
-      <div>
-        {/* For debug */}
-        <Button onClick={() => setPlayStatus('playing')} color="blackAlpha.800">
-          start
-        </Button>
-        <Button onClick={() => setPlayStatus('stopped')} color="blackAlpha.800">
-          stop
-        </Button>
-        <Button
-          onClick={() => setPlayStatus('intervalStarted')}
-          color="blackAlpha.800"
-        >
-          interval
-        </Button>
-      </div>
-    </Box>
+      <Box paddingBottom="10px" />
+    </Flex>
   )
 }
 
