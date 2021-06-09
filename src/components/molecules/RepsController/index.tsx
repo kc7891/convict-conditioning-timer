@@ -2,13 +2,14 @@ import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 
 type Props = {
-  reps: number
+  isPlaying: boolean
+  currentReps: number
   onIncrementReps: () => void
   onDecrementReps: () => void
 }
 
 const RepsController: React.FC<Props> = ({
-  reps,
+  currentReps,
   onIncrementReps,
   onDecrementReps,
 }) => {
@@ -28,7 +29,7 @@ const RepsController: React.FC<Props> = ({
         minWidth="80px"
         textAlign="right"
       >
-        {reps}
+        {currentReps}
       </Text>
       <Box>
         <Button

@@ -1,31 +1,20 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { PlayStatus } from '../../templates/TimerTemplate'
 import useTimer from './logics/useTimer'
 
 type Props = {
-  playStatus: PlayStatus
-  onIntervalCountDone: () => void
+  isPlaying: boolean
+  onIncrement: () => void
+  onDecrement: () => void
+  currentInterval: number
 }
 
+// TODO: Fix this. Interval might be manage in useRepsSoundPlayer
 const IntervalController: React.FC<Props> = ({
-  onIntervalCountDone,
-  playStatus,
+  onIncrement,
+  onDecrement,
+  currentInterval,
 }) => {
-  const { currentTime, start, stop, increment, decrement } = useTimer(30)
-
-  const incrementHandler = () => {
-    if (playStatus === 'stopped') increment()
-  }
-
-  const decrementHandler = () => {
-    if (playStatus === 'stopped') decrement()
-  }
-
-  useEffect(() => {
-    playStatus === 'intervalStarted' ? start(onIntervalCountDone) : stop()
-  }, [playStatus])
-
   return (
     <Flex
       alignItems="center"
@@ -42,11 +31,11 @@ const IntervalController: React.FC<Props> = ({
         minWidth="80px"
         textAlign="right"
       >
-        {currentTime}
+        {currentInterval}
       </Text>
       <Box>
         <Button
-          onClick={decrementHandler}
+          onClick={onDecrement}
           fontSize="24px"
           variant="solid"
           color="blackAlpha.800"
@@ -55,7 +44,7 @@ const IntervalController: React.FC<Props> = ({
         </Button>
         <Button
           ml="3px"
-          onClick={incrementHandler}
+          onClick={onIncrement}
           fontSize="24px"
           variant="solid"
           color="blackAlpha.800"

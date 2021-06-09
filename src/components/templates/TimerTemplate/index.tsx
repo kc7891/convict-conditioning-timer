@@ -1,34 +1,28 @@
 import IntervalController from '../../molecules/IntervalController'
 import { Box, Flex } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import PlayerController from '../../molecules/PlayerController'
 import RepsController from '../../molecules/RepsController'
 import { SoundToggleBar } from '../../molecules/SoundToggleBar'
 import useToggle from './logics/useToggle'
+import useRepsSoundPlayer from '../../../logics/useRepsSoundPlayer'
 
 export type PlayStatus = 'playing' | 'stopped' | 'intervalStarted'
 
 const TimerTemplate: React.FC = () => {
   const [soundOn, toggleSound] = useToggle(true)
   const [voiceOn, toggleVoice] = useToggle(true)
-  const [targetReps, setTargetReps] = useState(10)
-  const [playStatus, setPlayStatus] = useState<PlayStatus>('stopped')
-
-  const incrementReps = () => {
-    if (playStatus !== 'stopped') return
-    setTargetReps((prev) => {
-      if (prev >= 999) return 999
-      return prev + 1
-    })
-  }
-
-  const decrementReps = () => {
-    if (playStatus !== 'stopped') return
-    setTargetReps((prev) => {
-      if (prev <= 1) return 1
-      return prev - 1
-    })
-  }
+  const {
+    play,
+    stop,
+    isPlaying,
+    currentReps,
+    currentInterval,
+    incrementReps,
+    decrementReps,
+    incrementInterval,
+    decrementInterval,
+  } = useRepsSoundPlayer()
 
   return (
     <Flex
@@ -44,19 +38,18 @@ const TimerTemplate: React.FC = () => {
         toggleVoice={toggleVoice}
       />
       <RepsController
-        reps={targetReps}
+        isPlaying={isPlaying}
+        currentReps={currentReps}
         onDecrementReps={decrementReps}
         onIncrementReps={incrementReps}
       />
       <IntervalController
-        playStatus={playStatus}
-        onIntervalCountDone={() => null}
+        isPlaying={isPlaying}
+        onIncrement={incrementInterval}
+        onDecrement={decrementInterval}
+        currentInterval={currentInterval}
       />
-      <PlayerController
-        status={playStatus === 'stopped' ? 'stopped' : 'playing'}
-        onPlay={() => setPlayStatus('playing')}
-        onStop={() => setPlayStatus('stopped')}
-      />
+      <PlayerController isPlaying={isPlaying} onPlay={play} onStop={stop} />
       <Box paddingBottom="10px" />
     </Flex>
   )
